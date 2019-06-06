@@ -1,0 +1,29 @@
+﻿<ChangeLog> Eddie's notes about this versions
+
+
+v5: 2018-07-21
+- implemented check of blank fields
+
+v4: 2018-07-20
+- concluded implementation of conversion/error handling (finally!)
+- implemented XmlSerializer (after removing IParty)
+
+v3: 2018-07-18, 19
+- implemented ObservableCollection (changed from List<IParty> to ObservableCollection<IParty>)
+- implemented filtering with LINQ
+
+v2: 2018-07-17
+- changed Customer City from enum to String.
+- changed class Schedule from private to public
+- renamed class Schedule to 'typeSchedule'
+- tryed to implement XmlSerializer... (at least, the XML Writer/Reader is working)
+- implemented Data Island to the field City
+
+v1: 2018-07-16 (or 15?)
+- cloned Assignment 4.
+- implemented DataGrid (needs make update automatic).
+- tried to implement XML Serializer (unsuccessfully).
+- started to implement XML Writer/Reader.
+- perceived the need for changes in the Customer City (from enum to String and with a dropdown list on the interface).
+
+</ChangeLog> 

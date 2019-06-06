@@ -1,0 +1,112 @@
+﻿<Window x:Class="WpfApp100.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp100"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:AdultParty x:Key="Schedule"/>
+        <local:MyConverter x:Key="myConverter"/>
+        <local:PartyDayConverter x:Key="partyDayConverter"/>
+        <local:RowColorConverter x:Key="rowColorConverter"/>
+        <local:AllFieldsOkConverter x:Key="allFieldsOkConverter"/>
+
+    </Window.Resources>
+    <Grid DataContext="{DynamicResource Schedule}">
+
+        <Grid HorizontalAlignment="Left" Height="402" Margin="10,10,0,0" VerticalAlignment="Top" Width="775">
+            <Label Content="(between 1 and 31)" HorizontalAlignment="Left" Margin="70,211,0,0" VerticalAlignment="Top" Width="123" Background="White" Foreground="#FF248421"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="49" Margin="0,276,0,0" Stroke="Black" VerticalAlignment="Top" Width="298" Opacity="0.5"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Margin="0,325,0,0" Stroke="Black" VerticalAlignment="Top" Width="298" Opacity="0.5"/>
+            <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="10,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="288" RenderTransformOrigin="-0.744,0.413" TabIndex="1"/>
+            <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
+            <Label Content="Average Age:" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
+            <Label Content="Party Day:" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" Margin="10,336,0,0" VerticalAlignment="Top" Width="75" Click="buttonSave_Click" Height="30" ToolTip="Save schedule to a file."/>
+            <Button x:Name="buttonRestore" Content="Restore" HorizontalAlignment="Left" Margin="90,336,0,0" VerticalAlignment="Top" Width="75" Click="buttonRestore_Click" Height="30" ToolTip="Restore schedule from a file."/>
+            <Button x:Name="buttonClearSchedule" Content="Clear Schedule" HorizontalAlignment="Left" Margin="193,336,0,0" VerticalAlignment="Top" Width="96" Click="buttonClearSchedule_Click" Height="30" ToolTip="Clear schedule from RAM, but it can be restored."/>
+            <Button x:Name="buttonClearFields" Content="Clear Fields" HorizontalAlignment="Left" Margin="193,284,0,0" VerticalAlignment="Top" Width="96" Height="30" Click="buttonClearFields_Click"/>
+            <Label Content="City:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnClearFilterName" Content="Clear" HorizontalAlignment="Left" Margin="472,10,0,0" VerticalAlignment="Top" Width="45" Click="btnClearFilterName_Click"/>
+            <Button x:Name="btnClearFilterCity" Content="Clear" HorizontalAlignment="Left" Margin="624,10,0,0" VerticalAlignment="Top" Width="41" Click="btnClearFilterCity_Click"/>
+
+            <Button x:Name="buttonRegister" Content="Register" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="75" Click="buttonRegister_Click" Height="28" IsDefault="True">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource allFieldsOkConverter}">
+                        <Binding ElementName="textBoxName" Path="Text"/>
+                        <Binding ElementName="textBoxAverageAge" Path="Text"/>
+                        <Binding ElementName="textBoxPartyDay" Path="Text"/>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+
+            <TextBox x:Name="textBoxAverageAge"
+                     HorizontalAlignment="Left" Height="23" Margin="10,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"
+                     TabIndex="3" LostFocus="textBoxAverageAge_LostFocus"
+                     Foreground="{Binding Path=AverageAge, Converter={StaticResource myConverter}}"
+                     ToolTip="{Binding ElementName=textBoxAverageAge, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="AverageAge">
+                        <Binding.ValidationRules>
+                            <local:AverageAgeRule Min="1" Max="150"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="textBoxPartyDay"
+                     HorizontalAlignment="Left" Height="23" Margin="10,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"
+                     LostFocus="textBoxPartyDay_LostFocus" TabIndex="4"
+                     Foreground="{Binding Path=PartyDay, Converter={StaticResource partyDayConverter}}"
+                     ToolTip="{Binding ElementName=textBoxPartyDay, Path=(Validation.Errors)[0].ErrorContent}">
+                <TextBox.Text>
+                    <Binding Path="PartyDay">
+                        <Binding.ValidationRules>
+                            <local:AverageAgeRule Min="1" Max="31"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <DataGrid
+                Name="theGrid"
+                HorizontalAlignment="Left" Height="307" Margin="332,69,0,0" VerticalAlignment="Top" Width="422"
+                ItemsSource="{Binding Path=PartyList}"
+                AutoGenerateColumns="False"
+                IsReadOnly="True">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Day" Binding="{Binding PartyDay}"/>
+                    <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding CustomerCity}"/>
+                    <DataGridTextColumn Header="AverageAge" Binding="{Binding AverageAge}"/>
+                </DataGrid.Columns>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Foreground" Value="{Binding Path=AverageAge, Converter={StaticResource rowColorConverter}}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
+            </DataGrid>
+
+            <ListBox x:Name="ListBoxCities" HorizontalAlignment="Left" Height="65" Margin="10,87,0,0" VerticalAlignment="Top" Width="100" IsTabStop="True" TabIndex="2"/>
+            <Label Content="Name:" HorizontalAlignment="Left" Margin="402,7,0,0" VerticalAlignment="Top" Width="53"/>
+            <Label Content="or" HorizontalAlignment="Left" Margin="519,33,0,0" VerticalAlignment="Top" Height="23"/>
+            <TextBox x:Name="txtFilterName"
+                     IsEnabled="{Binding ElementName=checkBoxFilterBy, Path=IsChecked}"
+                     HorizontalAlignment="Left" Height="23" Margin="402,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="Eddie" KeyUp="txtFilterName_KeyUp"/>
+            <TextBox x:Name="txtFilterCity"
+                     IsEnabled="{Binding ElementName=checkBoxFilterBy, Path=IsChecked}"
+                     HorizontalAlignment="Left" Height="23" Margin="545,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="Kitchener" KeyUp="txtFilterCity_KeyUp"/>
+            <Button x:Name="btnFilter"
+                    IsEnabled="{Binding ElementName=checkBoxFilterBy, Path=IsChecked}"
+                    Content="Filter" HorizontalAlignment="Left" Margin="679,33,0,0" VerticalAlignment="Top" Width="75" Click="btnFilter_Click" Height="23"/>
+            <CheckBox x:Name="checkBoxFilterBy" Content="Filter by:" HorizontalAlignment="Left" Margin="332,35,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <Label Content="City:" HorizontalAlignment="Left" Margin="548,7,0,0" VerticalAlignment="Top" Width="44"/>
+
+        </Grid>
+    </Grid>
+</Window>
