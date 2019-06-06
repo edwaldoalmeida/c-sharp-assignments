@@ -1,6 +1,6 @@
 # Assignment #3: Carterer Schedule
 
-Specific concepts exercised in this assignment:
+Specific concepts exercised with this assignment:
 
 * Interfaces
 * Abstract Classes

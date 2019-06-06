@@ -1,6 +1,6 @@
 # Assignment #5: Generic Schedule
 
-Specific concepts exercised in this assignment:
+Specific concepts exercised with this assignment:
 
 * GUI design in Visual Studio
 * Data binding
