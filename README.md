@@ -5,3 +5,5 @@ These projects were developed for class assignments and they date from July 2018
 With the Software Development Techniques class I've not only reviewed important topics for software development such as data types, data structures, control flow, Object Orientation etc., but I've also learned some modern and important concepts as indicated in each assignment description (individual directories).
 
 Everything I've learned in this C# Course is making easy to catch new languages up such as JavaScript, Java, Swift, Python etc.
+
+<a rel="edwaldoalmeida.com" href="https://www.edwaldoalmeida.com">**Edwaldo Almeida**</a> @ 2019

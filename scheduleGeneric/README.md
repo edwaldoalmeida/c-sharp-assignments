@@ -24,3 +24,5 @@ Here are a couple of screenshots of the app running:
 ![picture of the app main screen with 3 records](pictures/picture1.png)
 
 ![picture of the app using the filter feature](pictures/picture2.png)
+
+<a rel="edwaldoalmeida.com" href="https://www.edwaldoalmeida.com">**Edwaldo Almeida**</a> @ 2019

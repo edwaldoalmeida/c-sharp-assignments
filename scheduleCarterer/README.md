@@ -46,3 +46,5 @@ Specific requirements:
 4. Create a class, which will hold all appointments. Make it using an indexer
 5. Sort the list of appointments you made using List<>.Sort method. You must implement IComparable<> interface in the base class of the items you put in the list. Sort by year or by age (depending on which problem you extend)
 6. Iterate through all appointments and perform all tasks. Hint: use delegates for the tasks, which are different for each item
+
+<a rel="edwaldoalmeida.com" href="https://www.edwaldoalmeida.com">**Edwaldo Almeida**</a> @ 2019
