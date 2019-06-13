@@ -1,6 +1,6 @@
 # Assignment #5: Generic Schedule
 
-Specific concepts exercised with this assignment:
+## Specific concepts exercised in this assignment
 
 * GUI design in Visual Studio
 * Data binding
@@ -8,7 +8,7 @@ Specific concepts exercised with this assignment:
 * Saving files in binary format and XML (with and without serialization)
 * LINQ
 
-Assignment requirements:
+## Assignment requirements
 
 1. Create a one-window (one-page) application, which will have two distinct capabilities (placed in the separate areas of the screen):
    * Create a record to be placed in the scheduler

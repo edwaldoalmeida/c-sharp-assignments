@@ -1,6 +1,6 @@
 # Assignment #3: Carterer Schedule
 
-Specific concepts exercised with this assignment:
+## Specific concepts exercised in this assignment
 
 * Interfaces
 * Abstract Classes
@@ -8,7 +8,7 @@ Specific concepts exercised with this assignment:
 * Sort (using IComparable)
 * Delegates
 
-Assignment requirements:
+## Assignment requirements
 
 The caterer needs a schedule for the next month. The caterer delivers food, sets up the tables and cleans up. The caterer needs also to prepare food based on the wishes of the customer. Every customer has a contact name, city (take Kitchener, Cambridge, Waterloo if imagination does not help) and average age of the people at the party
 
